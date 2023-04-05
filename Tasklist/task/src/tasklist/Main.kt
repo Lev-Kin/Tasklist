@@ -1,17 +1,19 @@
 package tasklist
 
-import kotlinx.datetime.LocalDate
+import kotlinx.datetime.*
 
 class TaskList {
     private val taskList: MutableList<Task> = mutableListOf()
 
     fun chooseAction() {
         do {
-            println("Input an action (add, print, end):")
+            println("Input an action (add, print, edit, delete, end):")
             val action = readln().lowercase()
             when (action) {
                 "add" -> makeTask()
                 "print" -> tryPrintTaskList()
+                "edit" -> edit()
+                "delete" -> delete()
                 "end" -> end()
                 else -> println("The input action is invalid")
             }
@@ -95,6 +97,50 @@ class TaskList {
         return true
     }
 
+    private fun validTaskNumber(): Int {
+        return try {
+            println("Input the task number (1-${taskList.size}):")
+            val taskNum = readln().toInt()
+            if (taskNum in 1..taskList.size) taskNum - 1 else throw Exception("Out of Range")
+        } catch (e: Exception) {
+            println("Invalid task number")
+            validTaskNumber()
+        }
+    }
+
+    private fun validField(): String {
+        val validFields = listOf("priority", "date", "time", "task")
+        println("Input a field to edit (priority, date, time, task):")
+        return try {
+            val field = readln()
+            if (field in validFields) field else throw Exception("Invalid field")
+        } catch (e: Exception) {
+            println(e.message)
+            validField()
+        }
+    }
+
+    private fun edit() {
+        if (!tryPrintTaskList()) return
+
+        val taskNum = validTaskNumber()
+
+        taskList[taskNum] = when (validField()) {
+            "priority" -> taskList[taskNum].copy(taskPriority = validPriority())
+            "date" -> taskList[taskNum].copy(taskDate = validDate())
+            "time" -> taskList[taskNum].copy(taskTime = validTime())
+            "task" -> taskList[taskNum].copy(taskDescription = validDescription() ?: return)
+            else -> taskList[taskNum]
+        }
+        println("The task is changed")
+    }
+
+    private fun delete() {
+        if (!tryPrintTaskList()) return
+        taskList.removeAt(validTaskNumber())
+        println("The task is deleted")
+    }
+
     private fun end() {
         println("Tasklist exiting!")
     }
@@ -102,11 +148,11 @@ class TaskList {
     data class Task(
         val taskDate: String,
         private val taskTime: String,
-        val taskPriority: String,
+        val taskPriority: String = "N",
         val taskDescription: List<String>
     ) {
         fun printTask(listIndex: Int) {
-            val newFormat = "%-3s%s %s %s\n%-3s%3s"
+            val newFormat = "%-3s%s %s %s %s\n%-3s%3s"
             val extFormat = "%-3s%s"
             val newTaskDesc = fixDescriptionWidth()
             for (taskIndex in newTaskDesc.indices) {
@@ -117,6 +163,7 @@ class TaskList {
                             taskDate,
                             taskTime,
                             taskPriority,
+                            dueTag(),
                             "",
                             newTaskDesc[taskIndex]
                         )
@@ -131,6 +178,16 @@ class TaskList {
                 newTaskDescList.addAll(mutableListOf(taskDescription[taskLine]))
             }
             return newTaskDescList
+        }
+
+
+        private fun dueTag(): String {
+            val daysTillDue = Clock.System.now().toLocalDateTime(TimeZone.UTC).date.daysUntil(taskDate.toLocalDate())
+            return when {
+                (daysTillDue < 0) -> "O"
+                (daysTillDue == 0) -> "T"
+                else -> "I"
+            }
         }
 
     }
