@@ -32,8 +32,16 @@ class TaskList {
             taskPriority = priority,
             taskDescription = description
         )
-
         taskList.add(taskToAdd)
+    }
+
+    private fun validPriority(): String {
+        var priority: String
+        do {
+            println("Input the task priority (C, H, N, L):")
+            priority = readln().uppercase()
+        } while (!priority.matches("[CHNL]".toRegex()))
+        return priority
     }
 
     private fun validDate(): String {
@@ -61,15 +69,6 @@ class TaskList {
         }
     }
 
-    private fun validPriority(): String {
-        var priority: String
-        do {
-            println("Input the task priority (C, H, N, L):")
-            priority = readln().uppercase()
-        } while (!priority.matches("[CHNL]".toRegex()))
-        return priority
-    }
-
     private fun validDescription(): List<String>? {
         println("Input a new task (enter a blank line to end):")
         val description = mutableListOf<String>()
@@ -82,19 +81,6 @@ class TaskList {
             return null
         }
         return description
-    }
-
-    private fun tryPrintTaskList(): Boolean {
-        if (taskList.isEmpty()) {
-            println("No tasks have been input")
-            return false
-        }
-
-        for (taskIndex in taskList.indices) {
-            taskList[taskIndex].printTask(taskIndex)
-            println()
-        }
-        return true
     }
 
     private fun validTaskNumber(): Int {
@@ -118,6 +104,22 @@ class TaskList {
             println(e.message)
             validField()
         }
+    }
+
+    private fun tryPrintTaskList(): Boolean {
+        if (taskList.isEmpty()) {
+            println("No tasks have been input")
+            return false
+        }
+
+        val headerString = "| N  |    Date    | Time  | P | D |                   Task                     |"
+        val breakLine = "+----+------------+-------+---+---+--------------------------------------------+"
+        println("$breakLine\n$headerString\n$breakLine")
+        for (taskIndex in taskList.indices) {
+            taskList[taskIndex].printTask(taskIndex)
+            println(breakLine)
+        }
+        return true
     }
 
     private fun edit() {
@@ -146,14 +148,14 @@ class TaskList {
     }
 
     data class Task(
+        val taskPriority: String = "N",
         val taskDate: String,
         private val taskTime: String,
-        val taskPriority: String = "N",
         val taskDescription: List<String>
     ) {
         fun printTask(listIndex: Int) {
-            val newFormat = "%-3s%s %s %s %s\n%-3s%3s"
-            val extFormat = "%-3s%s"
+            val extFormat = "|    |            |       |   |   |%-44s|"
+            val newFormat = "| %-3s| %s | %s | %s | %s |%-44s|"
             val newTaskDesc = fixDescriptionWidth()
             for (taskIndex in newTaskDesc.indices) {
                 if (taskIndex == 0) {
@@ -162,34 +164,49 @@ class TaskList {
                             listIndex + 1,
                             taskDate,
                             taskTime,
-                            taskPriority,
+                            priorityTag(),
                             dueTag(),
-                            "",
                             newTaskDesc[taskIndex]
                         )
                     )
-                } else println(extFormat.format("", newTaskDesc[taskIndex]))
+                } else println(extFormat.format(newTaskDesc[taskIndex]))
             }
         }
 
         private fun fixDescriptionWidth(): MutableList<String> {
             val newTaskDescList = mutableListOf<String>()
             for (taskLine in taskDescription.indices) {
-                newTaskDescList.addAll(mutableListOf(taskDescription[taskLine]))
+                newTaskDescList.addAll(recursiveDescWidthFix(taskDescription[taskLine]))
             }
             return newTaskDescList
         }
 
+        private fun recursiveDescWidthFix(line: String): MutableList<String> {
+            return if (line.length >= 45) {
+                val recurse: MutableList<String> = recursiveDescWidthFix(line.substring(44))
+                recurse.add(0, line.substring(0, 44))
+                recurse
+            } else mutableListOf(line)
+        }
 
         private fun dueTag(): String {
             val daysTillDue = Clock.System.now().toLocalDateTime(TimeZone.UTC).date.daysUntil(taskDate.toLocalDate())
             return when {
-                (daysTillDue < 0) -> "O"
-                (daysTillDue == 0) -> "T"
-                else -> "I"
+                (daysTillDue < 0) -> "\u001B[101m \u001B[0m"
+                (daysTillDue == 0) -> "\u001B[103m \u001B[0m"
+                else -> "\u001B[102m \u001B[0m"
             }
         }
 
+        private fun priorityTag(): String {
+            return when (taskPriority) {
+                "C" -> "\u001B[101m \u001B[0m"
+                "H" -> "\u001B[103m \u001B[0m"
+                "N" -> "\u001B[102m \u001B[0m"
+                "L" -> "\u001B[104m \u001B[0m"
+                else -> " "
+            }
+        }
     }
 }
 
@@ -197,4 +214,3 @@ fun main() {
     val newList = TaskList()
     newList.chooseAction()
 }
-
