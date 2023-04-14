@@ -1,0 +1,18 @@
+type: code
+files:
+- name: src/Main.kt
+  visible: true
+  text: |-
+    fun multiplyInts(list: List<Any>): List<Any> {
+        val result = mutableListOf<Any>()
+        for (item in list) {
+            when (item) {
+                // make your code here
+            }
+        }
+        return result
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/26461#comment
+status: Solved
+record: -1

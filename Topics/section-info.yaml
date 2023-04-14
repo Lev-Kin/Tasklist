@@ -9,3 +9,10 @@ content:
 - Member functions
 - Destructuring declarations
 - If expression
+- Functions as objects
+- Work with MutableLists
+- Type cast and smart cast
+- Lambda expressions
+- Named arguments
+- Multi-dimensional array
+- The main() function

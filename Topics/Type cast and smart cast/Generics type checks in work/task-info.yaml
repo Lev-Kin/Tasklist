@@ -1,0 +1,15 @@
+type: code
+files:
+- name: src/Main.kt
+  visible: true
+  text: |-
+    fun <T> countElementsOfType(list: List<Any>, clazz: Class<T>): Int {
+        // make your code here
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/26462#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Mon, 10 Apr 2023 07:18:33 UTC"
+record: -1

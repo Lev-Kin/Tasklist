@@ -1,9 +1,16 @@
 package tasklist
 
+import java.io.*
+import com.squareup.moshi.*
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.datetime.*
 
 class TaskList {
     private val taskList: MutableList<Task> = mutableListOf()
+
+    init {
+        taskListFromJSON()
+    }
 
     fun chooseAction() {
         do {
@@ -18,6 +25,27 @@ class TaskList {
                 else -> println("The input action is invalid")
             }
         } while (action != "end")
+    }
+
+    private fun taskListToJSON(): String {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val taskListType = Types.newParameterizedType(MutableList::class.java, Task::class.java)
+        val taskListAdapter = moshi.adapter<MutableList<Task>>(taskListType)
+        return taskListAdapter.toJson(taskList)
+    }
+
+    private fun taskListFromJSON() {
+        val savedList = File("tasklist.json")
+        if (!savedList.exists()) return
+
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val taskListType = Types.newParameterizedType(MutableList::class.java, Task::class.java)
+        val taskListAdapter = moshi.adapter<MutableList<Task>>(taskListType)
+        val newList = taskListAdapter.fromJson(savedList.readText())
+        taskList.addAll(newList!!)
     }
 
     private fun makeTask() {
@@ -144,6 +172,8 @@ class TaskList {
     }
 
     private fun end() {
+        val savedList = File("tasklist.json")
+        savedList.writeText(taskListToJSON())
         println("Tasklist exiting!")
     }
 

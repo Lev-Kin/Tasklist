@@ -34,6 +34,11 @@
             <option value="$PROJECT_DIR$/Topics/Destructuring declarations/What do you know about destructuring declarations" />
             <option value="$PROJECT_DIR$/Topics/For loop and arrays/Is it here" />
             <option value="$PROJECT_DIR$/Topics/For loop and arrays/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Functions as objects/Continuation-Passing Style" />
+            <option value="$PROJECT_DIR$/Topics/Functions as objects/Function composition" />
+            <option value="$PROJECT_DIR$/Topics/Functions as objects/Function type" />
+            <option value="$PROJECT_DIR$/Topics/Functions as objects/Reference to a top" />
+            <option value="$PROJECT_DIR$/Topics/Functions as objects/Theory" />
             <option value="$PROJECT_DIR$/Topics/If expression/Healthy sleep" />
             <option value="$PROJECT_DIR$/Topics/If expression/Leap year" />
             <option value="$PROJECT_DIR$/Topics/If expression/Queens" />
@@ -43,6 +48,11 @@
             <option value="$PROJECT_DIR$/Topics/Kotlinx datetime library/Leap Year" />
             <option value="$PROJECT_DIR$/Topics/Kotlinx datetime library/Theory" />
             <option value="$PROJECT_DIR$/Topics/Kotlinx datetime library/Using the kotlinx-datetime library" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/ Not  predicate" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Capturing variable" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Max" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Polynomial" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Theory" />
             <option value="$PROJECT_DIR$/Topics/List/Concise" />
             <option value="$PROJECT_DIR$/Topics/List/Even numbers" />
             <option value="$PROJECT_DIR$/Topics/List/It's all about the List" />
@@ -59,6 +69,18 @@
             <option value="$PROJECT_DIR$/Topics/Member functions/Patient needs a doctor" />
             <option value="$PROJECT_DIR$/Topics/Member functions/Theory" />
             <option value="$PROJECT_DIR$/Topics/Member functions/Volume of a cube" />
+            <option value="$PROJECT_DIR$/Topics/Multi-dimensional array/Correct statements" />
+            <option value="$PROJECT_DIR$/Topics/Multi-dimensional array/Kotlin arrays" />
+            <option value="$PROJECT_DIR$/Topics/Multi-dimensional array/Practical applications" />
+            <option value="$PROJECT_DIR$/Topics/Multi-dimensional array/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Declarations" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Determine the result" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Find the correct invocations" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Greeting" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Invocations" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Perimeter" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Named arguments/URL" />
             <option value="$PROJECT_DIR$/Topics/Processing strings/Convert a date" />
             <option value="$PROJECT_DIR$/Topics/Processing strings/Determine the output" />
             <option value="$PROJECT_DIR$/Topics/Processing strings/Determine the value" />
@@ -69,6 +91,24 @@
             <option value="$PROJECT_DIR$/Topics/String arrays/Empty" />
             <option value="$PROJECT_DIR$/Topics/String arrays/Theory" />
             <option value="$PROJECT_DIR$/Topics/String arrays/Yet another array" />
+            <option value="$PROJECT_DIR$/Topics/The main() function/Change program arguments" />
+            <option value="$PROJECT_DIR$/Topics/The main() function/Comprehension" />
+            <option value="$PROJECT_DIR$/Topics/The main() function/Theory" />
+            <option value="$PROJECT_DIR$/Topics/The main() function/Using arguments" />
+            <option value="$PROJECT_DIR$/Topics/Type cast and smart cast/Defining a variable type" />
+            <option value="$PROJECT_DIR$/Topics/Type cast and smart cast/Generics type checks in work" />
+            <option value="$PROJECT_DIR$/Topics/Type cast and smart cast/In the game only String" />
+            <option value="$PROJECT_DIR$/Topics/Type cast and smart cast/Multiply the numbers by 2" />
+            <option value="$PROJECT_DIR$/Topics/Type cast and smart cast/Replace non-string literal" />
+            <option value="$PROJECT_DIR$/Topics/Type cast and smart cast/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Adding lists" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Adding values" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Changing the existing values" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Guard On The Gate" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Initialization" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Playing with numbers" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Work with MutableLists/Yet another list" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
